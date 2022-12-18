@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Component from './Component';
+import Intro from './Intro';
+import { QuestionsProvider } from './Context/QuestionsContext';
+
+import * as data from './JSON-React Assignment.json';
+import Question from './Questions/Question';
+
+
+const App = () => {
+    return (
+        <QuestionsProvider value={data}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Intro />}>
+                        <Route path="questions" element={<Component />} />
+                        <Route path="question" element={<Question />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </QuestionsProvider>
+    )
 }
 
 export default App;
